@@ -1,0 +1,137 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model users {
+  user_id    String   @id @default(uuid())
+  email      String   @unique
+  password   String
+  name       String?
+  role       String   @default("USER")
+  created_at DateTime @default(now())
+}
+
+model customers {
+  customer_id String   @id @default(uuid())
+  name        String
+  email       String?
+  phone       String?
+  created_at  DateTime @default(now())
+
+  orders orders[]
+}
+
+model products {
+  product_id  String   @id @default(uuid())
+  name        String
+  sku         String
+  barcode     String?
+  description String?
+  price       Decimal
+  created_at  DateTime @default(now())
+
+  inventory              inventory?
+  order_items            order_items[]
+  inventory_transactions inventory_transactions[]
+  return_items           return_items[]
+}
+
+model inventory {
+  inventory_id String   @id @default(uuid())
+  product_id   String   @unique
+  quantity     Int
+  updated_at   DateTime @default(now())
+
+  product products @relation(fields: [product_id], references: [product_id])
+}
+
+model orders {
+  order_id     Int      @id @default(autoincrement())
+  customer_id  String?
+  order_date   DateTime @default(now())
+  status       String   @default("PENDING")
+  total_amount Decimal  @default(0)
+
+  customer               customers?               @relation(fields: [customer_id], references: [customer_id])
+  order_items            order_items[]
+  order_payments         order_payments[]
+  returns                returns? // one-to-one relation to returns (returns.order_id is unique)
+  inventory_transactions inventory_transactions[]
+}
+
+model order_items {
+  order_item_id String  @id @default(uuid())
+  order_id      Int
+  product_id    String
+  quantity      Int
+  unit_price    Decimal
+  subtotal      Decimal
+
+  order   orders   @relation(fields: [order_id], references: [order_id])
+  product products @relation(fields: [product_id], references: [product_id])
+}
+
+model payment_methods {
+  payment_method_id String   @id @default(uuid())
+  method_name       String
+  description       String?
+  created_at        DateTime @default(now())
+
+  order_payments order_payments[]
+}
+
+model order_payments {
+  order_payment_id  String   @id @default(uuid())
+  order_id          Int
+  payment_method_id String
+  amount            Decimal
+  payment_date      DateTime @default(now())
+  reference_no      String?
+  notes             String?
+
+  order           orders          @relation(fields: [order_id], references: [order_id])
+  payment_methods payment_methods @relation(fields: [payment_method_id], references: [payment_method_id])
+}
+
+model returns {
+  return_id Int     @id @default(autoincrement())
+  order_id  Int?    @unique
+  order     orders? @relation(fields: [order_id], references: [order_id])
+
+  return_date   DateTime @default(now())
+  status        String   @default("PENDING")
+  refund_amount Decimal  @default(0)
+
+  return_items           return_items[]
+  inventory_transactions inventory_transactions[]
+}
+
+model return_items {
+  return_item_id String  @id @default(uuid())
+  return_id      Int
+  product_id     String
+  quantity       Int
+  refund_amount  Decimal
+
+  returns returns  @relation(fields: [return_id], references: [return_id])
+  product products @relation(fields: [product_id], references: [product_id])
+}
+
+model inventory_transactions {
+  transaction_id    String   @id @default(uuid())
+  product_id        String
+  change_type       String
+  quantity_change   Int
+  related_order_id  Int?
+  related_return_id Int?
+  created_at        DateTime @default(now())
+
+  product products @relation(fields: [product_id], references: [product_id])
+  order   orders?  @relation(fields: [related_order_id], references: [order_id])
+  returns returns? @relation(fields: [related_return_id], references: [return_id])
+}

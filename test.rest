@@ -1,0 +1,203 @@
+###
+POST http://localhost:4000/auth/register
+Content-Type: application/json
+
+{
+  "email": "admin@example.com",
+  "password": "secret123",
+  "name": "Admin",
+  "role": "ADMIN"
+}
+
+###
+
+POST http://localhost:4000/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@example.com",
+  "password": "secret123"
+}
+
+###
+
+# Use the token returned by the login request (replace <PASTE_TOKEN_HERE>)
+POST http://localhost:4000/products
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3ZDlkMmQ1MS02NmZlLTRkNzktODMxOS0wNDk0MmI3ZTY0NGUiLCJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzYxNzQ2NDM1LCJleHAiOjE3NjIzNTEyMzV9.AL3kk9lr7r7mtrtEG91o5K5I5bXbrKVJcvuoeTGMtj4
+
+{
+  "name": "Widget b",
+  "sku": "WGT-A-001",
+  "barcode": "1234567890123",
+  "description": "Sample product",
+  "price": 19.99
+}
+
+### get all products
+GET http://localhost:4000/products
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3ZDlkMmQ1MS02NmZlLTRkNzktODMxOS0wNDk0MmI3ZTY0NGUiLCJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzYxNzQ2NDM1LCJleHAiOjE3NjIzNTEyMzV9.AL3kk9lr7r7mtrtEG91o5K5I5bXbrKVJcvuoeTGMtj4
+
+### get product by id
+GET http://localhost:4000/products/95446486-c7fe-4bdf-ac32-1540cb7d2b98
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3ZDlkMmQ1MS02NmZlLTRkNzktODMxOS0wNDk0MmI3ZTY0NGUiLCJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzYxNzQ2NDM1LCJleHAiOjE3NjIzNTEyMzV9.AL3kk9lr7r7mtrtEG91o5K5I5bXbrKVJcvuoeTGMtj4
+
+### update product by id
+PUT http://localhost:4000/products/95446486-c7fe-4bdf-ac32-1540cb7d2b98
+Content-Type: application/json 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3ZDlkMmQ1MS02NmZlLTRkNzktODMxOS0wNDk0MmI3ZTY0NGUiLCJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzYxNzQ2NDM1LCJleHAiOjE3NjIzNTEyMzV9.AL3kk9lr7r7mtrtEG91o5K5I5bXbrKVJcvuoeTGMtj4
+
+{
+  "name": "Widget A - Updated",
+  "sku": "WGT-A-001",
+  "barcode": "1234567890123",
+  "description": "Updated product description",
+  "price": 24.99
+}
+
+### delete product by id
+DELETE http://localhost:4000/products/ba6343f2-b90a-4031-a55b-99a5654e408b
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3ZDlkMmQ1MS02NmZlLTRkNzktODMxOS0wNDk0MmI3ZTY0NGUiLCJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzYxNzQ2NDM1LCJleHAiOjE3NjIzNTEyMzV9.AL3kk9lr7r7mtrtEG91o5K5I5bXbrKVJcvuoeTGMtj4 
+
+### customer 
+POST http://localhost:4000/customers
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3ZDlkMmQ1MS02NmZlLTRkNzktODMxOS0wNDk0MmI3ZTY0NGUiLCJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzYxNzQ2NDM1LCJleHAiOjE3NjIzNTEyMzV9.AL3kk9lr7r7mtrtEG91o5K5I5bXbrKVJcvuoeTGMtj4
+
+{
+  "name": "Customer A",
+  "email": "customerA@example.com",
+  "phone": "123-456-7890"
+}
+
+
+### get all customers
+GET http://localhost:4000/customers
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3ZDlkMmQ1MS02NmZlLTRkNzktODMxOS0wNDk0MmI3ZTY0NGUiLCJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzYxNzQ3MDU5LCJleHAiOjE3NjIzNTE4NTl9.7a6Ff-DR1OTuFGszWiLiGFq9x26vNwdKJEEPVU0UwzI
+### get customer by id
+GET http://localhost:4000/customers/15f11bbc-eb7e-4f29-b2eb-127ba162673b
+Authorization: Bearer   eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3ZDlkMmQ1MS02NmZlLTRkNzktODMxOS0wNDk0MmI3ZTY0NGUiLCJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzYxNzQ3MDU5LCJleHAiOjE3NjIzNTE4NTl9.7a6Ff-DR1OTuFGszWiLiGFq9x26vNwdKJEEPVU0UwzI
+### update customer by id
+PUT http://localhost:4000/customers/15f11bbc-eb7e-4f29-b2eb-127ba162673b
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3ZDlkMmQ1MS02NmZlLTRkNzktODMxOS0wNDk0MmI3ZTY0NGUiLCJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzYxNzQ3MDU5LCJleHAiOjE3NjIzNTE4NTl9.7a6Ff-DR1OTuFGszWiLiGFq9x26vNwdKJEEPVU0UwzI
+
+{
+  "name": "Customer A - Updated",
+  "email": "customerA_updated@example.com",
+  "phone": "123-456-7890"
+}
+### delete customer by id
+DELETE http://localhost:4000/customers/15f11bbc-eb7e-4f29-b2eb-127ba162673b
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3ZDlkMmQ1MS02NmZlLTRkNzktODMxOS0wNDk0MmI3ZTY0NGUiLCJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzYxNzQ3MDU5LCJleHAiOjE3NjIzNTE4NTl9.7a6Ff-DR1OTuFGszWiLiGFq9x26vNwdKJEEPVU0UwzI
+
+### create order
+POST http://localhost:4000/orders   
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3ZDlkMmQ1MS02NmZlLTRkNzktODMxOS0wNDk0MmI3ZTY0NGUiLCJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzYxNzQ3NTE4LCJleHAiOjE3NjIzNTIzMTh9.yxSgXvhbqKegS2vxu-EXkvSScTyKUhoThe2OjpqnvTo
+
+{
+  "customerId": "d6d9aa5d-6f27-4888-99df-4b1be072f11f",
+  "items": [
+    {
+      "productId": "95446486-c7fe-4bdf-ac32-1540cb7d2b98",
+      "quantity": 1
+    }
+  ]
+}   
+
+### get all orders
+GET http://localhost:4000/orders
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3ZDlkMmQ1MS02NmZlLTRkNzktODMxOS0wNDk0MmI3ZTY0NGUiLCJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzYxNzQ2NDM1LCJleHAiOjE3NjIzNTEyMzV9.AL3kk9lr7r7mtrtEG91o5K5I5bXbrKVJcvuoeTGMtj4
+
+### get order by id
+GET http://localhost:4000/orders/1a2b3c4d-56e7-8901-2345-67890abcdef1
+Authorization: Bearer   eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3ZDlkMmQ1MS02NmZlLTRkNzktODMxOS0wNDk0MmI3ZTY0NGUiLCJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzYxNzQ2NDM1LCJleHAiOjE3NjIzNTEyMzV9.AL3kk9lr7r7mtrtEG91o5K5I5bXbrKVJcvuoeTGMtj4
+### update order by id
+PUT http://localhost:4000/orders/1a2b3c4d-56e7-8901-2345-67890abcdef1
+Content-Type: application/json  
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3ZDlkMmQ1MS02NmZlLTRkNzktODMxOS0wNDk0MmI3ZTY0NGUiLCJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzYxNzQ2NDM1LCJleHAiOjE3NjIzNTEyMzV9.AL3kk9lr7r7mtrtEG91o5K5I5bXbrKVJcvuoeTGMtj4
+
+{
+  "items": [
+    {
+      "productId": "95446486-c7fe-4bdf-ac32-1540cb7d2b98",
+      "quantity": 2
+    }
+  ]
+}
+
+### delete order by id
+DELETE http://localhost:4000/orders/1a2b3c4d-56e7-8901-2345-67890abcdef1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3ZDlkMmQ1MS02NmZlLTRkNzktODMxOS0wNDk0MmI3ZTY0NGUiLCJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzYxNzQ2NDM1LCJleHAiOjE3NjIzNTEyMzV9.AL3kk9lr7r7mtrtEG91o5K5I5bXbrKVJcvuoeTGMtj4     
+### create inventory record
+POST http://localhost:4000/inventory    
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3ZDlkMmQ1MS02NmZlLTRkNzktODMxOS0wNDk0MmI3ZTY0NGUiLCJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzYxNzUyNTg2LCJleHAiOjE3NjIzNTczODZ9.ARPxor_1p_ogWuGhja3EThxOrRX-67f4a44hmDbI7Xc
+
+{
+  "productId": "95446486-c7fe-4bdf-ac32-1540cb7d2b98",
+  "quantity": 100,
+  "location": "Main Warehouse"
+}
+### get all inventory records
+GET http://localhost:4000/inventory
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3ZDlkMmQ1MS02NmZlLTRkNzktODMxOS0wNDk0MmI3ZTY0NGUiLCJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzYxNzQ2NDM1LCJleHAiOjE3NjIzNTEyMzV9.AL3kk9lr7r7mtrtEG91o5K5I5bXbrKVJcvuoeTGMtj4 
+### get inventory record by id
+GET http://localhost:4000/inventory/abcdef12-3456-7890-abcd-ef1234567890
+Authorization: Bearer   eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3ZDlkMmQ1MS02NmZlLTRkNzktODMxOS0wNDk0MmI3ZTY0NGUiLCJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzYxNzQ2NDM1LCJleHAiOjE3NjIzNTEyMzV9.AL3kk9lr7r7mtrtEG91o5K5I5bXbrKVJcvuoeTGMtj4
+### update inventory record by id
+PUT http://localhost:4000/inventory/abcdef12-3456-7890-abcd-ef1234567890
+Content-Type: application/json
+Authorization: Bearer   eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3ZDlkMmQ1MS02NmZlLTRkNzktODMxOS0wNDk0MmI3ZTY0NGUiLCJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzYxNzQ2NDM1LCJleHAiOjE3NjIzNTEyMzV9.AL3kk9lr7r7mtrtEG91o5K5I5bXbrKVJcvuoeTGMtj4
+
+{
+  "quantity": 150
+}   
+
+### delete inventory record by id
+DELETE http://localhost:4000/inventory/abcdef12-3456-7890-abcd-ef1234567890
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3ZDlkMmQ1MS02NmZlLTRkNzktODMxOS0wNDk0MmI3ZTY0NGUiLCJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzYxNzQ2NDM1LCJleHAiOjE3NjIzNTEyMzV9.AL3kk9lr7r7mtrtEG91o5K5I5bXbrKVJcvuoeTGMtj4     
+
+
+### create return 
+POST http://localhost:4000/returns
+Content-Type: application/json  
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3ZDlkMmQ1MS02NmZlLTRkNzktODMxOS0wNDk0MmI3ZTY0NGUiLCJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzYxNzQ3NTE4LCJleHAiOjE3NjIzNTIzMTh9.yxSgXvhbqKegS2vxu-EXkvSScTyKUhoThe2OjpqnvTo
+
+{
+  "orderId": "d4e5f6a7-b890-1234-5678-90abcdef1234",
+  "items": [
+    {
+      "productId": "95446486-c7fe-4bdf-ac32-1540cb7d2b98",
+      "quantity": 1,
+      "reason": "Defective item"
+    }
+  ]
+}
+
+### get all returns
+GET http://localhost:4000/returns   
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3ZDlkMmQ1MS02NmZlLTRkNzktODMxOS0wNDk0MmI3ZTY0NGUiLCJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzYxNzQ3NTE4LCJleHAiOjE3NjIzNTIzMTh9.yxSgXvhbqKegS2vxu-EXkvSScTyKUhoThe2OjpqnvTo     
+### get return by id
+GET http://localhost:4000/returns/abcdef12-3456-7890-abcd-ef123456
+Authorization: Bearer  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3ZDlkMmQ1MS02NmZlLTRkNzktODMxOS0wNDk0MmI3ZTY0NGUiLCJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzYxNzQ3NTE4LCJleHAiOjE3NjIzNTIzMTh9.yxSgXvhbqKegS2vxu-EXkvSScTyKUhoThe2OjpqnvTo    
+### update return by id
+PUT http://localhost:4000/returns/abcdef12-3456-7890-abcd-ef123456
+Content-Type: application/json  
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3ZDlkMmQ1MS02NmZlLTRkNzktODMxOS0wNDk0MmI3ZTY0NGUiLCJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzYxNzQ3NTE4LCJleHAiOjE3NjIzNTIzMTh9.yxSgXvhbqKegS2vxu-EXkvSScTyKUhoThe2OjpqnvTo
+
+{
+  "items": [
+    {
+      "productId": "95446486-c7fe-4bdf-ac32-1540cb7d2b98",
+      "quantity": 2,
+      "reason": "Wrong size"
+    }
+  ]
+}
+
+### delete return by id
+DELETE http://localhost:4000/returns/abcdef12-3456-7890-abcd-ef123456   
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3ZDlkMmQ1MS02NmZlLTRkNzktODMxOS0wNDk0MmI3ZTY0NGUiLCJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzYxNzQ3NTE4LCJleHAiOjE3NjIzNTIzMTh9.yxSgXvhbqKegS2vxu-EXkvSScTyKUhoThe2OjpqnvTo 
+
