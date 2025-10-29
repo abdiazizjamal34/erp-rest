@@ -39,4 +39,4 @@ Use `Authorization: Bearer <token>` for all other endpoints.
 - Decimal values should be sent as strings when precision matters (Prisma Decimal).
 - Uses ES Modules (`"type": "module"`).
 
-MIT © 2025
+abdiaziz13 © 2025
